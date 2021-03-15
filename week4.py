@@ -10,7 +10,7 @@ app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
 
 @app.route("/")
 def homePage():
-    if session.get('username')=='name':
+    if session.get('username')=='member':
         print("使用者已登入")
         return redirect("/member")
     print("使用者未登入")
@@ -21,7 +21,7 @@ def logIn():
     account=request.form["account"]
     password=request.form["password"]
     if account=="test" and password=="test":
-        session['username']='name'
+        session['username']='member'
         print("使用者已登入")
         return redirect("/member")
     else:
@@ -30,7 +30,7 @@ def logIn():
 
 @app.route("/member")
 def member():
-    if session.get('username')=='name':
+    if session.get('username')=='member':
         print("使用者已登入")
         return render_template("member.html")
     print("使用者未登入")
@@ -38,9 +38,9 @@ def member():
 
 @app.route("/error")
 def error():
-    if session.get('username')=='name':
+    if session.get('username')=='member':
         print("使用者已登入")
-        return render_template("member.html")
+        return redirect("/member")
     return render_template("error.html")
 
 
